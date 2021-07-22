@@ -1,0 +1,121 @@
+학문 분야 : 전산과, 컴공, 전자공
+
+분야를 정해야한다.
+위에서부터 내려감
+
+
+[applications]
+
+[os] (operating system) 
+
+
+위쪽은 computer science 아래쪽은 electrical engineering
+
+
+[firmware]  	sk 하이닉스에 소프트웨어직군에서 많이뽑음  
+플래시메모리는 계속쓰면 점점 용량이 줄어들거임 
+플레시 셀이 죽어서 상위 레이어에서 판단하고 버림
+
+[hardware] (trangister) - 장치 산업 공정
+
+
+레지스터는 계산하기위해 잠깐 기억하는 것
+memory는 기억한 종이
+
+cpu와 레지스터 사이에  필수적으로 전달되어야하는 정보 3가지
+address data control
+
+solid state인데(모래 인 단단한 고체인데) 생명체처럼 움직이는 이유 
+펌프 처럼 충방전 할때 cpu도 심장멈추는것처럼 clock 이 계속있어야함
+
+cpu에서 계산을 다해서 마지막에 io등 에 출력으로 영향을 줘야하는데 버스 구조로 
+되어있음 근데 버스 구조인이유?
+
+cpu에서 나오는 결과 데이터들을 network나 sub disk interface등 을 하나로 연결함
+
+장점
+1. time multiflexing 을 하고있어서 효율적임  라인이 하나라서 효율적이다.
+라인을 share을 해서 효율적임 ( 실직적인 하드웨어를 한선만 쓰기 때문에)
+2. 범용성있다. 스캐일러블하다(추가에 용이하다 기존 선에 신경안써도됨)
+3. 동시에 읽어 들이기는 가능하나 multiple write는 불가능
+한 cpu가 여러개 컨트롤하는데 누가 점유하고있으면 check를 함
+
+***폴링, 인터럽트***
+
+폴링은 cpu가 주도함
+**즉 소프트웨어 마인드임 while(1) 처럼 계속 에너지를 쓰게되어서 전기가 개많이쓴다.
+
+인터럽트는 하드웨어가 주도함
+**즉 하드웨어적 마인드 
+예를들어 main 어디에도 button을 쓰는 함수가 없음 그러나 버튼을 누르면 바로 실행
+
+harness 하네스구조 bus구조의 반대임 cpu에서 하나씩 해당하는 곳으로 연결됨
+ex) cpu에서 ram rom printer등 전용 선 사용
+자동차는 하네스 구조 -> critical하기때문에 음악을 사용하면서 bus점유하면 브레이크 안됨
+
+high bandwidth memory (hbm) 
+cpu와 사용장치사이의 
+
+공정이 낮아지면 왜좋냐 
+저항이 작아져서 rc가 작아져서 그래서 전달이 빨리짐
+
+하네스는 a 에서 b c d 다 연결 (각자 개인 회선)
+b도 c도 d도 각각 개인 회선
+
+장점은 병목현상이 없고 존나빠름
+
+단점은 새로운 장치가 들어올경우 (e) 모든 간선을 다 수정해야함
+
+버퍼 2개  병렬로 설계하면 불남 전류 무한대되서 그래서 예쩐에 불난 기계가있음
+
+
+프로그램카운터는 address bus에 물려있음 
+address bus, control bus, data bus
+
+메모리는
+두가지로 나뉜다.
+
+volatile temporary memory, 
+-DRAM, SRAM
+
+DRAM은 커패시터로 1비트 엄청나게 작다 근데 펌핑한다고 에너지 많이머금
+리눅스에 올라가려면 dram 써야함
+리눅스 부팅은 하드에있던 리눅스를 dram에 올리는 작업 cpu는 dram를 읽어들임
+
+
+SRAM은 쉽게생각해서 무한루프 VDD유지될때까지 데이터 저장 MOS트랜지스터 4개 
+스위치 2개필요 1비트 표현하기위해 MOS 6개 필요 
+함수의 로컬변수는 보통 sram에드감
+cache 메모리는 s램
+레지스터는 플립플롭
+
+NON-volatile permanent memory 
+rom  
+ssd 
+flash -> 보통 mcu에 드감
+eeprom
+-------------------------
+
+function		cpu  ->  register -> cache -> ram ->  external storage
+implementation	logic -> flip/flop -> sram -> dram ->  hdd/cdrom/sdd/flash
+
+cpu는 지 자신으로는 아무것도 아닌데 소프트웨어가 올라가면 움직인
+썸모드는 명령어 하나쓰는데 clock이 좀더 소모 
+유리한것은 메모리가 줄어들어서 코드가 작아짐 -> 임베디드 영역에서 매우 유리
+
+pc는 코드상 ram 가리키는 구조
+sp는 레지스터상 ram가리키는 구조
+
+jit -> just intime compilation
+
+
+risc -> 컴파일해보면 명령어 인코딩이 같은 크기로 나옴
+cisc -> 컴파일하면 지 맘대로 나오는것
+
+코드 메모리 데이터 메모리
+
+ldscript 파일에서 시작 메모리 주소를 명시하면 그곳에서 시작함
+
+운영체제를 사용하면 메모리를무한으로 가정하고 
+
+루프언롤링

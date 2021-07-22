@@ -1,0 +1,113 @@
+다음주 마프 시험
+cmd  -> systeminfo -> 정보
+
+리뷰
+고레벨 언어 -> 머신레벨 언어
+cpu가 이해할 수 있는 언어로 일을 시켜야한다.
+
+a + b		highlevel language
+add a , b		assembly
+10010101101	machine
+
+coding -> compilation -> assembling -> assembler -> machine lang
+
+## dram sram 찾아보자 flash mem도
+
+프로세서마다 레지스터 이름이 다르고 개수가 제한적임.
+## alu 사용하면 flags에 남는다 ??? **** 논리회로 에서나옴
+
+cisc 는 유동적 크기 risc는 고정된 크기 ex)4byte
+
+flash memory는 책 ->비휘발성
+code memory는 머리 (잠깐 기억) -> 휘발성
+data memory는 공책(필기용, 스택포인터 값은 주소) -> 휘발성
+
+instruction register 명령어 레지스터 (속도빠름)
+
+데이터레지스터
+arm프로세서 r0 ~ 16개존재
+
+레지스터는 f플립플롭이라서 크기가 dram에 비해 32배나 큼
+
+dram 은 공책 느림
+cash memory 휴대폰 (속도 더빠름)
+
+위에것은 리뷰한거고지금부터
+본격적인 linux내용
+arm programing
+
+intel cpu
+arm cpu
+amd는 호환이 가능 intel을
+
+ex 비쥬얼스튜디오로 인텔cpu 에서 들아가고 os window에서 만든 파일을 만들어서
+인텔 cpu에 linux에 올려서 될까? 안된다 세부적으로는 인텔 명령어가맞음
+근데 처음 해석하는애는 운영체제가 함 프로그램을 실행하는 첫번째관문이 os여서 
+즉 intel은 해석할수있는데 먼저 접촉하는 os는 해석이 안되서 불가
+
+비쥬얼은 windows가 해석하겠금 코딩되어서 리눅스에서 안됨
+
+크로스컴파일이 뭔가요? -> 
+크로스 컴파일러(cross compiler)는 컴파일러가 실행되는 플랫폼이 아닌 다른 플랫폼에서 
+실행 가능한 코드를 생성할 수 있는 컴파일러이다. 크로스 컴파일러 툴은 
+임베디드 시스템 혹은 여러 플랫폼에서 실행파일을 생성하는데 사용된다.
+
+
+지금부터 아무곳에서나 (현재 디렉토리에 다음 두 파일이 없더라도)
+arm-none-eabi-gcc와 xpack-qemu 두개를 쓸수있게 환경변수를 등록하는 과정입니다
+
+arm-none-eabi-gcc에 들어가서 bin 
+
+./arm-none-eani-gcc로 하기
+
+환경변수 설정하기
+gvim ~/.bashrc
+
+:$ 치면 제일 끝으로 감 
+
+맨끝에서 
+
+alias 'gvim'치고
+
+꿀팁 pwd로 현재 디렉토리 끌어서 스크롤로 톡누르면 바로 입력됨!!!
+
+중간에 스페이스바 넣으면안됨 !!!!!!!!!!!!!
+
+리눅스 path사이에 스페이스바 넣으면 안됨 ㅋㅋ
+
+맨끝에 export PATH=" 여기 스크롤 중간 누르기 "
+gcc-arm/bin의 경로와
+xpack-qeme의 경로를 ~/.bashrc에 맨끝에
+
+xpack또 bin들어가서 pwd치고 full path 
+
+echo $PATH
+CFLAGS
+썸모드 플로팅 처리 -> 한번 알아보자이깃
+
+elf 파일 형식 -> Executable and Linkable Format
+
+
+malloc할당은 메모리 위에서 내려오고
+stack은 밑에서부터올라가고 
+
+isr_vector -> isr inturrupt service routine 에서 주소를 찾아서 알려줌
+
+보드가 없더라도 qemu  에뮬레이터로 가상으로 올리게 하는 기능
+make qemu로 out.bin을 올려서 에뮬 돌림
+
+make gdb 로 디버깅 할수있는데 명령어 찾기
+
+디버깅순서
+make gdb
+
+target remote 127.0.0.1:1234 
+
+gdb) file out.elf
+
+gdb) load
+
+gdb) b(reakpoint) main
+
+n을 치면 넘어가면서 걸리느느부분 확인
+q누르면 종료
